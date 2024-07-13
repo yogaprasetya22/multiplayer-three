@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  position: fixed;
+  top     : 0;
+  left    : 0;
+  width   : 100%;
+  height  : 100%;
+}
+
+body {
+  margin: 0;
+}
+
+@layer components {
+  .overflow_type::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .overflow_type::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .overflow_type::-webkit-scrollbar-thumb {
+    background   : #0D7377;
+    border-radius: 10px;
+  }
+}
