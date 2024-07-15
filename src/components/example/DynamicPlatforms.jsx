@@ -5,7 +5,7 @@ import {
     CylinderCollider,
     RigidBody,
 } from "@react-three/rapier";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import * as THREE from "three";
 
 export default function DynamicPlatforms() {

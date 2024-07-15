@@ -3,10 +3,12 @@ import { Physics } from "@react-three/rapier";
 import { Experience } from "./components/Experience";
 
 import { Detailed, KeyboardControls, Loader } from "@react-three/drei";
-import { Suspense, useMemo, useState } from "react";
-import { UI } from "./components/UI";
+import { Suspense, useMemo } from "react";
 import { AudioManagerProvider } from "./hooks/useAudioManager";
 import { GameStateProvider } from "./hooks/useGameState";
+import { UI } from "./components/UI/UI";
+import { extend } from "@react-three/fiber";
+extend({ Detailed });
 
 export const Controls = {
     forward: "forward",
@@ -43,7 +45,7 @@ function App() {
                     <UI />
                     <Canvas
                         shadows
-                        camera={{ position: [0, 16, 50], fov: 70 }}
+                        camera={{ position: [0, 16, 50], fov: 40 }}
                         // onPointerDown={(e) => {
                         //     if (e.pointerType === "mouse") {
                         //         e.target.requestPointerLock();
@@ -51,7 +53,6 @@ function App() {
                         // }}
                     >
                         <Detailed distances={[0, 50, 100]} blur={0.5}>
-                            <color attach="background" args={["#041c0b"]} />
                             <Suspense fallback={null}>
                                 <Physics>
                                     <Experience />

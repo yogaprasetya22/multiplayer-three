@@ -39,10 +39,10 @@ export const CharacterController = ({
     const cameraViewProjectionMatrix = new Matrix4();
 
     useFrame(({ camera }, delta) => {
-        if(!rb.current){
+        if (!rb.current) {
             return;
         }
-        
+
         if (stage === "lobby") {
             return;
         }

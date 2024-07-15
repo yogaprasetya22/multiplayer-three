@@ -5,18 +5,14 @@ Command: npx gltfjsx@6.2.3 public/models/fallguy_char.glb -o src/components/Char
 
 import { Plane, Text, useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame, useGraph } from "@react-three/fiber";
-import React, {
-    useEffect,
-    useMemo,
-    useRef,
-} from "react";
+import React, { useEffect, useMemo, useRef } from "react";
+import { Color, MeshStandardMaterial } from "three";
 import { SkeletonUtils } from "three-stdlib";
 
 export function Character({
     animation = "wave", // FG_Run_A, FG_Walk_A, FG_Idle_A
     color = "yellow",
     name = "Player",
-    message = "",
     ...props
 }) {
     const group = useRef();
@@ -34,15 +30,37 @@ export function Character({
     }, [animation]);
 
     const textRef = useRef();
-    const messageRef = useRef();
-   
+    const playerColorMaterial = useMemo(
+        () =>
+            new MeshStandardMaterial({
+                color: new Color(color),
+            }),
+        [color]
+    );
+
+    useEffect(() => {
+        nodes.body?.traverse((child) => {
+            if (child.isMesh && child.material.name === "Material_0") {
+                child.material = playerColorMaterial;
+            }
+            if (child.isMesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            }
+        });
+        clone?.traverse((child) => {
+            if (child.isMesh && child.material.name === "Material_0") {
+                child.material = playerColorMaterial;
+            }
+            if (child.isMesh) {
+                child.castShadow = true;
+            }
+        });
+    }, [nodes, clone]);
 
     useFrame(({ camera }) => {
         if (textRef.current) {
             textRef.current.lookAt(camera.position);
-        }
-        if (messageRef.current) {
-            messageRef.current.lookAt(camera.position);
         }
     });
 
@@ -72,22 +90,6 @@ export function Character({
                     <meshBasicMaterial color="black" />
                 </Text>
             </group>
-            <group ref={messageRef}>
-                <Text
-                    position-y={4.5}
-                    fontSize={0.5}
-                    anchorX="center"
-                    anchorY="middle"
-                    font="fonts/PaytoneOne-Regular.ttf"
-                    maxWidth={5.5} // Adjust the maxWidth to control wrapping
-                    textAlign="center"
-                >
-                    
-                    {message}
-                    <meshBasicMaterial color="white" />
-                </Text>
-            </group>
-
             <group name="Scene">
                 <group name="fall_guys">
                     <primitive object={nodes._rootJoint} />

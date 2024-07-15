@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { useGameState } from "../hooks/useGameState";
+import { useGameState } from "../../hooks/useGameState";
 import { isHost, myPlayer, RPC } from "playroomkit";
 
 export const UI = () => {
@@ -84,13 +84,13 @@ export const UI = () => {
                     />
                 </svg>
             </button>
+            
             <div
                 className="absolute bottom-5 left-1/2 
                 transform -translate-x-1/2 pointer-events-auto
             w-[26rem] px-2 py-1 flex flex-col gap-4 "
             >
-                {/* chat list */}
-                <div className="flex pointer-events-auto flex-col gap-2 bg-gray-200/80 p-2 rounded-md max-h-[10rem] overflow-y-auto overflow_type">
+                {/* <div className="flex pointer-events-auto flex-col gap-2 bg-gray-200/80 p-2 rounded-md max-h-[10rem] overflow-y-auto overflow_type">
                     {chatMessages.map((chatMessage, index) => (
                         <div
                             key={index}
@@ -101,7 +101,6 @@ export const UI = () => {
                             }`}
                         >
                             <span
-                                // className={`font-bold text-xs `}
                                 className={`font-bold text-xs text-[${
                                     players.find(
                                         (player) =>
@@ -123,7 +122,7 @@ export const UI = () => {
                         </div>
                     ))}
                     <div ref={chatEndRef} />
-                </div>
+                </div> */}
                 <form
                     className="flex flex-row gap-2"
                     onSubmit={(e) => {
