@@ -1,6 +1,4 @@
 import { extend } from "@react-three/fiber";
-import { OrbitControls, TransformControls } from "three-stdlib";
-extend({ OrbitControls, TransformControls });
 import { Environment, Loader, Sky } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { myPlayer } from "playroomkit";
@@ -9,6 +7,8 @@ import { useGameState } from "../hooks/useGameState";
 import { CharacterController } from "./CharacterController";
 import EnvTwo from "./EnvTwo";
 import DynamicPlatforms from "./example/DynamicPlatforms";
+import Env from "./Env";
+extend({ Environment, EnvTwo, Sky });
 
 export const Experience = () => {
     const { players, stage } = useGameState();
@@ -30,7 +30,7 @@ export const Experience = () => {
             <Sky />
             <pointLight position={[10, 10, 10]} />
             <>
-                {stage !== "lobby" && <EnvTwo />}
+                {stage !== "lobby" && <Env />}
                 {players.map(
                     ({ state, controls }) =>
                         state?.state && (

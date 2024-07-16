@@ -8,7 +8,6 @@ Title: Fantasy Game Inn
 
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
-import { RPC } from "playroomkit";
 import { useState } from "react";
 
 export default function Env(props) {
@@ -17,7 +16,11 @@ export default function Env(props) {
     return (
         <RigidBody type="fixed" colliders="trimesh" ccd name="hexagon">
             <group {...props} dispose={null}>
-                <group rotation={[-Math.PI / 2, 0, 0]} scale={0.11}>
+                <group
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    scale={0.11}
+                    position={[0, -1.5, 0]}
+                >
                     <mesh
                         castShadow
                         receiveShadow
