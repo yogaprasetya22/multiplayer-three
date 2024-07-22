@@ -30,33 +30,6 @@ export function Character({
     }, [animation]);
 
     const textRef = useRef();
-    const playerColorMaterial = useMemo(
-        () =>
-            new MeshStandardMaterial({
-                color: new Color(color),
-            }),
-        [color]
-    );
-
-    useEffect(() => {
-        nodes.body?.traverse((child) => {
-            if (child.isMesh && child.material.name === "Material_0") {
-                child.material = playerColorMaterial;
-            }
-            if (child.isMesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-            }
-        });
-        clone?.traverse((child) => {
-            if (child.isMesh && child.material.name === "Material_0") {
-                child.material = playerColorMaterial;
-            }
-            if (child.isMesh) {
-                child.castShadow = true;
-            }
-        });
-    }, [nodes, clone]);
 
     useFrame(({ camera }) => {
         if (textRef.current) {

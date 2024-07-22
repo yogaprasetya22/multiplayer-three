@@ -42,24 +42,30 @@ function App() {
             <AudioManagerProvider>
                 <GameStateProvider>
                     <Loader />
-                    <UI />
-                    <Canvas
-                        shadows
-                        camera={{ position: [0, 16, 50], fov: 40 }}
-                        // onPointerDown={(e) => {
-                        //     if (e.pointerType === "mouse") {
-                        //         e.target.requestPointerLock();
-                        //     }
-                        // }}
-                    >
-                        <Detailed distances={[0, 50, 100]} blur={0.5}>
-                            <Suspense fallback={null}>
-                                <Physics>
-                                    <Experience />
-                                </Physics>
-                            </Suspense>
-                        </Detailed>
-                    </Canvas>
+                    <UI />{" "}
+                    <Suspense fallback={null}>
+                        <Canvas
+                            shadows
+                            camera={{ position: [0, 16, 50], fov: 40 }}
+                            // onPointerDown={(e) => {
+                            //     if (e.pointerType === "mouse") {
+                            //         e.target.requestPointerLock();
+                            //     }
+                            // }}
+                        >
+                            <Detailed distances={[0, 50, 100]} blur={0.5}>
+                                <Suspense fallback={null}>
+                                    <color
+                                        attach="background"
+                                        args={["#041c0b"]}
+                                    />
+                                    <Physics>
+                                        <Experience />
+                                    </Physics>
+                                </Suspense>
+                            </Detailed>
+                        </Canvas>
+                    </Suspense>
                 </GameStateProvider>
             </AudioManagerProvider>
         </KeyboardControls>

@@ -213,13 +213,19 @@ export const CharacterController = ({
             type={player ? "dynamic" : "kinematicPosition"}
             ref={rb}
             onCollisionEnter={(e) => {
-                // if (e.other.rigidBodyObject.name === "hexagon") {
-                inTheAir.current = false;
-                landed.current = true;
-                const curVel = rb.current.linvel();
-                curVel.y = 0;
-                rb.current.setLinvel(curVel);
-                // }
+                if (
+                    e.other.rigidBodyObject.name === "hexagon" ||
+                    e.other.rigidBodyObject.name === "sideMovePlatform" ||
+                    e.other.rigidBodyObject.name === "verticalMovePlatform" ||
+                    e.other.rigidBodyObject.name === "rotatePlatform" ||
+                    e.other.rigidBodyObject.name === "rotationDrum"
+                ) {
+                    inTheAir.current = false;
+                    landed.current = true;
+                    const curVel = rb.current.linvel();
+                    curVel.y = 0;
+                    rb.current.setLinvel(curVel);
+                }
             }}
             gravityScale={stage === "game" ? 2.5 : 0}
             name={player ? "player" : "other"}
